@@ -30,48 +30,46 @@ var c = canvas.getContext("2d");
 // }
 
 
-var x = Math.random() * innerWidth;
-var y = Math.random() * innerHeight;
-var dx = (Math.random() - 0.5) * 2 * 5;
-var dy = (Math.random() - 0.5) * 2 * 5;
-var r = 30;
+// var x = Math.random() * innerWidth;
+// var y = Math.random() * innerHeight;
+// var dx = (Math.random() - 0.5) * 2 * 5;
+// var dy = (Math.random() - 0.5) * 2 * 5;
+// var r = 30;
 
-function Circle(x, y, r){
+function Circle(x, y, dx, dy, r){
     this.x = x;
     this.y = y;
-    this.dx = (Math.random() - 0.5) * 2 * 5;
-    this.dy = (Math.random() - 0.5) * 2 * 5;
+    this.dx = dx;
+    this.dy = dy;
     this.r = r;
 
     this.draw = function(){
         c.beginPath();
-        c.arc(x, y, r, 0, Math.PI*2);
+        c.arc(this.x, this.y, this.r, 0, Math.PI*2);
         c.strokeStyle = "blue";
         c.stroke();
     }
+
+    this.update = function(){
+        if(this.x > innerWidth-this.r || this.x < this.r){
+            this.dx *= -1;
+        }
+        if(this.y > innerHeight-this.r || this.y < this.r){
+            this.dy *= -1;
+        }
+        this.x+=this.dx;
+        this.y+=this.dy
+    }
 }
 
-var circle = new Circle(200, 200, 30);
+var circle = new Circle(200, 200, 5, 5, 30);
 
 function animate(){
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
 
     circle.draw();
-
-    c.beginPath();
-    c.arc(x, y, r, 0, Math.PI*2);
-    c.strokeStyle = "blue";
-    c.stroke();
-    if(x > innerWidth-r || x < r){
-        dx *= -1;
-    }
-    if(y > innerHeight-r || y < r){
-        dy *= -1;
-    }
-
-    x+=dx;
-    y+=dy
+    circle.update()
 }
 
 animate();
