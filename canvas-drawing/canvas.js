@@ -31,6 +31,7 @@ var c = canvas.getContext("2d");
 
 
 var x = 200;
+var dx = 1;
 var y = 200;
 
 function animate(){
@@ -42,7 +43,7 @@ function animate(){
     c.strokeStyle = "blue";
     c.stroke();
 
-    x+=1;
+    x+=dx;
 }
 
 animate();
