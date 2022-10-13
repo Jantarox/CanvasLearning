@@ -16,6 +16,16 @@ c.moveTo(50,50);
 c.lineTo(300, 100);
 c.lineTo(100, 100);
 c.lineTo(300,300);
-c.strokeStyle = "blue";
+c.strokeStyle = "grey";
 c.stroke();
+
+
+for (var i = 0; i<100; i++){
+    c.beginPath();
+    var x = Math.random() * window.innerWidth;
+    var y = Math.random() * window.innerHeight;
+    c.arc(x, y, 30, 0, Math.PI*2);
+    c.strokeStyle = "blue";
+    c.stroke();
+}
 
